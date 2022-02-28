@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import UserForm from "./UserForm";
+import { userContext } from "./UserContext";
 
-const login = (email, password) => {
-  let status = true;
-  return fetch("/signin", {
+const apiLogin = (email, password) => {
+  return fetch("/api/signin", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -20,14 +20,16 @@ const login = (email, password) => {
 const Login = (props) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { login } = useContext(userContext);
 
   const handleLogin = (email, password) => {
     setError(null);
     setLoading(true);
 
-    login(email, password)
-      .then(() => {
+    apiLogin(email, password)
+      .then((user) => {
         props.onSuccess();
+        login(user);
       })
       .catch((err) => {
         setError(err);

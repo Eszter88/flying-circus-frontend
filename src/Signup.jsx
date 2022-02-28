@@ -3,7 +3,7 @@ import UserForm from "./UserForm";
 
 const signup = (email, password) => {
   let status = true;
-  return fetch("/signup", {
+  return fetch("/api/signup", {
     method: "POST",
     headers: {
       "Content-type": "application/json",
