@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import UserForm from "./UserForm";
+import { useNavigate } from "react-router-dom";
+import Google from "./Google";
 
 const signup = (email, password) => {
   let status = true;
+
   return fetch("/api/signup", {
     method: "POST",
     headers: {
@@ -30,6 +33,7 @@ const signup = (email, password) => {
 const SignUp = (props) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSignup = (email, password) => {
     setError(null);
@@ -37,7 +41,7 @@ const SignUp = (props) => {
 
     signup(email, password)
       .then(() => {
-        props.onSuccess();
+        navigate("/");
       })
       .catch((err) => {
         setError(err);
@@ -51,6 +55,7 @@ const SignUp = (props) => {
       <h2>Register</h2>
       {error ? <p>{error?.message ?? "unknown error"}</p> : null}
       <UserForm onSubmit={handleSignup} loading={loading} />
+      <Google />
     </div>
   );
 };

@@ -1,10 +1,12 @@
-import { useCallback, useEffect, useContext, useRef } from "react";
+import { useEffect, useCallback, useRef } from "react";
 import { userContext } from "./UserContext";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Google = () => {
   const { login } = useContext(userContext);
+  const navigate = useNavigate();
   const popup = useRef(null);
-
   const openPopup = useCallback(() => {
     const width = 600;
     const height = 600;
@@ -28,17 +30,18 @@ const Google = () => {
         const parsed = JSON.stringify(data);
         login(parsed);
         popup.current?.close();
+        navigate("/");
       }
     };
     window.addEventListener("message", listener);
     return () => {
       window.removeEventListener("message", listener);
     };
-  }, []);
+  }, [login]);
 
   return (
     <div>
-      <button onClick={openPopup}> Login with Google</button>
+      <button onClick={openPopup}>Login with Google</button>
     </div>
   );
 };
