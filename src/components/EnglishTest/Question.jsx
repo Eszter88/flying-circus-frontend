@@ -1,9 +1,6 @@
-import loginGuard from "./loginGuard";
-import { useState } from "react";
-
 const Question = (props) => {
   return (
-    <>
+    <div>
       <h1>{props.question}</h1>
       <ul>
         {props.answers.map((answer, index) => {
@@ -29,32 +26,9 @@ const Question = (props) => {
           );
         })}
       </ul>
-      <button>Send</button>
-    </>
-  );
-};
-
-const EnglishTest = () => {
-  const [question, setQuestion] = useState({
-    question: "question text",
-    answers: ["answer1", "answer2", "answer3", "answer4"],
-  });
-
-  const [activeIndex, setActiveIndex] = useState(-1);
-
-  const onSelectAnswer = (index) => {
-    setActiveIndex(index);
-  };
-
-  return (
-    <div>
-      <Question
-        {...question}
-        activeIndex={activeIndex}
-        onSelectAnswer={onSelectAnswer}
-      />
+      <button onClick={props.onSubmitAnswer}>Send</button>
     </div>
   );
 };
 
-export default loginGuard(EnglishTest);
+export default Question;

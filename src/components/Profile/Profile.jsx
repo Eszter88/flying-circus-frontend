@@ -1,4 +1,4 @@
-import loginGuard from "./loginGuard";
+import { loginGuard } from "../Auth";
 
 const Profile = (props) => {
   const user = props.user;

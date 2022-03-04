@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import UserForm from "./UserForm";
+import UserForm from "../UserForm";
 import { useNavigate } from "react-router-dom";
 import Google from "./Google";
 
@@ -52,9 +52,12 @@ const SignUp = (props) => {
   };
   return (
     <div>
-      <h2>Register</h2>
       {error ? <p>{error?.message ?? "unknown error"}</p> : null}
-      <UserForm onSubmit={handleSignup} loading={loading} />
+      <UserForm
+        onSubmit={handleSignup}
+        loading={loading}
+        title="Registration"
+      />
       <Google />
     </div>
   );

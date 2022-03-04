@@ -37,11 +37,13 @@ const Google = () => {
     return () => {
       window.removeEventListener("message", listener);
     };
-  }, [login]);
+  }, []);
 
   return (
-    <div>
-      <button onClick={openPopup}>Login with Google</button>
+    <div className="google-btn-container">
+      <button className="google-btn" onClick={openPopup}>
+        Sign in with Google
+      </button>
     </div>
   );
 };

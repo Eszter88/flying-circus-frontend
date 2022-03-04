@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import UserForm from "./UserForm";
+import UserForm from "../UserForm";
 import { userContext } from "./UserContext";
 import { useNavigate } from "react-router-dom";
 import Google from "./Google";
@@ -43,9 +43,8 @@ const Login = (props) => {
   };
   return (
     <div>
-      <h2>Login</h2>
       {error ? <p>{error?.message ?? "unknow error"}</p> : null}
-      <UserForm onSubmit={handleLogin} loading={loading} />
+      <UserForm onSubmit={handleLogin} loading={loading} title="Login" />
       <Google />
     </div>
   );
